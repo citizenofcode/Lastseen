@@ -5,7 +5,7 @@ Created by JoeGamez#7087. Open an issue if you have any questions or if you've f
 ## Steps for Installation 
 1. Download files.
 2. Install all NodeJS modules required. `npm i` will do the trick.
-3. Fill out `config.example`. 
+3. Fill out `config.example` and rename it to `config.json`.
 * `token` is your Discord token.
 * `prefix` is your Bot prefix.
 * `owners` is an array of bot owner IDs. 
