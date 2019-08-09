@@ -15,7 +15,7 @@ exports.exec = async (message, args) => {
 	if (onlineStatus.includes(user.presence.status)) { lastseen = 'Right now'; }
 	else {
 		lastseen = await message.client.db.get(user.id);
-		if (lastseen) lastseen = `${moment.duration(Date.now() - lastseen).format('D [days], H [hourss], m [minutes] [and] s [seconds]')} ago`;
+		if (lastseen) lastseen = `${moment.duration(Date.now() - lastseen).format('D [days], H [hours], m [minutes] [and] s [seconds]')} ago`;
 		else lastseen = 'Unknown (Not enough information gathered)';
 	}
 	message.channel.send(embed.setDescription(lastseen));
