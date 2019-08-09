@@ -1,6 +1,6 @@
 {
   "name": "lastseen",
-  "version": "1.0.0",
+  "version": "0.5.0",
   "description": "A bot to see where an arbitrary user was last seen online.",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "keyv": "^3.1.0",
     "klaw": "^3.0.0",
     "moment": "^2.24.0",
-    "moment-duration-format": "^2.3.2"
+    "moment-duration-format": "^2.3.2",
+    "ms": "^2.1.2"
   }
 }
