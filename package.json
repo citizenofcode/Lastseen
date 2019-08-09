@@ -1,0 +1,21 @@
+{
+  "name": "lastseen",
+  "version": "1.0.0",
+  "description": "A bot to see where an arbitrary user was last seen online.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "author": "Joe",
+  "license": "MIT",
+  "dependencies": {
+    "@keyv/sqlite": "^2.0.1",
+    "discord.js": "^11.5.1",
+    "eslint": "^6.1.0",
+    "keyv": "^3.1.0",
+    "klaw": "^3.0.0",
+    "moment": "^2.24.0",
+    "moment-duration-format": "^2.3.2"
+  }
+}
