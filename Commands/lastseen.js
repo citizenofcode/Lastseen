@@ -1,24 +1,18 @@
-const { RichEmbed } = require('discord.js');
-const moment = require('moment');
+const lastseen = require('../Util/lastseen.js');
+const paginate = require('../Util/paginate.js');
+const parseUsers = require('../Util/parseUsers.js');
 require('moment-duration-format');
 
 exports.exec = async (message, args) => {
-	if (!args.length) return message.channel.send('No user provided.');
-	const user = (message.mentions.users.first() && args[0].match(/<@!?\d+/)) ? message.mentions.users.first() : message.client.users.get(args[0]);
-	if (!user) return message.channel.send('Hey, that\'s not a valid user!');
-	let lastseen = 'Unknown (Not enough information gathered)';
-	const embed = new RichEmbed()
-		.setColor(message.client.config.color)
-		.setTitle(`${user.tag} was last seen`)
-		.setTimestamp();
-	const onlineStatus = ['dnd', 'idle', 'online'];
-	if (onlineStatus.includes(user.presence.status)) { lastseen = 'Right now'; }
-	else {
-		lastseen = await message.client.db.get(user.id);
-		if (lastseen) lastseen = `${moment.duration(Date.now() - lastseen).format('D [days], H [hours], m [minutes] [and] s [seconds]')} ago`;
-		else lastseen = 'Unknown (Not enough information gathered)';
-	}
-	message.channel.send(embed.setDescription(lastseen));
+	const users = parseUsers(message.client, args);
+	if (!users || !users.size) return message.channel.send('No users provided!');
+	const embeds = [];
+	users.forEach(user => {
+		embeds.push(lastseen(message.client, user));
+	});
+	if (embeds.length === 1) return message.channel.send(await embeds[0]);
+	paginate(embeds, message);
+
 };
 
 exports.inhibitor = (message) => {
@@ -29,7 +23,7 @@ exports.help = {
 	name: 'lastseen',
 	aliases: ['seen'],
 	examples: ['seen @JoeGamez', 'seen 524817579202838551'],
-	usage: 'seen <user>',
+	usage: 'seen <users>',
 	description: 'Checks when a user was last online.',
 	cooldown: 3,
 };
